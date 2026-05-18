@@ -69,7 +69,7 @@ export default function LandingPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-extrabold text-gray-900">Mengapa AIScreen?</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900">Mengapa RitaScreen?</h2>
             <p className="mt-3 text-gray-500 max-w-xl mx-auto">Kami menggunakan teknologi terdepan untuk memastikan proses rekrutmen yang adil dan efisien.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -128,9 +128,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <BrainCircuit className="w-5 h-5 text-primary-400" />
-            <span className="font-bold text-white">AIScreen</span>
+            <span className="font-bold text-white">RitaScreen</span>
           </div>
-          <p className="text-sm">© 2026 AI CV Screening System. All rights reserved.</p>
+          <p className="text-sm">© 2026 RitaScreen. All rights reserved.</p>
         </div>
       </footer>
     </div>

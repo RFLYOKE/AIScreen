@@ -98,7 +98,7 @@ export default function RecruiterLoginPage() {
         </div>
 
         <p className="text-center text-indigo-400 text-xs mt-6">
-          © 2026 AIScreen — Sistem Rekrutmen Berbasis AI
+          © 2026 RitaScreen — Sistem Rekrutmen Berbasis AI
         </p>
       </div>
     </div>

@@ -40,7 +40,7 @@ export default function Navbar() {
               <BrainCircuit className="w-5 h-5 text-white" />
             </div>
             <span className="font-extrabold text-gray-900 text-lg tracking-tight">
-              AI<span className="text-primary-600">Screen</span>
+              Rita<span className="text-primary-600">Screen</span>
             </span>
           </Link>
 
