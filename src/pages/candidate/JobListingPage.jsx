@@ -25,10 +25,10 @@ export default function JobListingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary-700 to-indigo-700 text-white py-14">
+      <div className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-14">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">Lowongan Tersedia</h1>
-          <p className="text-indigo-200 text-lg mb-8">Temukan posisi yang paling sesuai dengan keahlian dan ambisimu</p>
+          <p className="text-primary-200 text-lg mb-8">Temukan posisi yang paling sesuai dengan keahlian dan ambisimu</p>
 
           {/* Search + Filter */}
           <div className="bg-white rounded-2xl p-4 flex flex-col sm:flex-row gap-3 shadow-xl max-w-2xl mx-auto">
@@ -124,7 +124,7 @@ function JobCard({ job, closed }) {
 
       <div className="flex flex-wrap gap-1.5">
         {job.requirements.slice(0, 4).map((r) => (
-          <Badge key={r} color="indigo">{r}</Badge>
+          <Badge key={r} color="primary">{r}</Badge>
         ))}
         {job.requirements.length > 4 && (
           <Badge color="gray">+{job.requirements.length - 4}</Badge>

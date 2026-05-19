@@ -22,10 +22,10 @@ export default function RecruiterLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-primary-900 to-indigo-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-primary-900 to-slate-800 flex items-center justify-center px-4">
       {/* Decorative blobs */}
       <div className="absolute top-0 left-1/3 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-500/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative w-full max-w-md">
         {/* Logo */}
@@ -34,7 +34,7 @@ export default function RecruiterLoginPage() {
             <BrainCircuit className="w-8 h-8 text-primary-600" />
           </div>
           <h1 className="text-2xl font-extrabold text-white">Portal Rekruter</h1>
-          <p className="text-indigo-300 text-sm mt-1">Masuk ke dashboard rekrutmen Anda</p>
+          <p className="text-primary-200 text-sm mt-1">Masuk ke dashboard rekrutmen Anda</p>
         </div>
 
         {/* Card */}
@@ -97,7 +97,7 @@ export default function RecruiterLoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-indigo-400 text-xs mt-6">
+        <p className="text-center text-primary-300 text-xs mt-6">
           © 2026 RitaScreen — Sistem Rekrutmen Berbasis AI
         </p>
       </div>

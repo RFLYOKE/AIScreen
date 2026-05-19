@@ -114,7 +114,7 @@ export default function ApplicantListPage() {
                     </td>
                     <td className="px-5 py-4">
                       {applicant.published
-                        ? <Badge color="indigo">Published</Badge>
+                        ? <Badge color="primary">Published</Badge>
                         : <Badge color="gray">Draft</Badge>}
                     </td>
                     <td className="px-5 py-4">

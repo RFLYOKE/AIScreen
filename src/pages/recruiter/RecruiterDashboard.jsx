@@ -10,7 +10,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { Card, Badge } from '../../components/ui';
 
-const COLORS = ['#6366f1', '#f43f5e', '#10b981', '#f59e0b', '#3b82f6', '#8b5cf6'];
+const COLORS = ['#ef4444', '#dc2626', '#9ca3af', '#475569', '#f87171', '#1e293b'];
 
 const StatCard = ({ icon: Icon, label, value, color, sub }) => (
   <Card className="p-6 flex items-start gap-4">
@@ -169,7 +169,7 @@ export default function RecruiterDashboard() {
                     </td>
                     <td className="py-3">
                       {a.published
-                        ? <Badge color="indigo">Published</Badge>
+                        ? <Badge color="primary">Published</Badge>
                         : <Badge color="gray">Draft</Badge>}
                     </td>
                   </tr>

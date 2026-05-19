@@ -26,13 +26,11 @@ export function Button({ children, variant = 'primary', size = 'md', className =
 export function Badge({ children, color = 'gray', className = '' }) {
   const colors = {
     gray: 'bg-gray-100 text-gray-700',
-    indigo: 'bg-indigo-100 text-indigo-700',
     green: 'bg-emerald-100 text-emerald-700',
     red: 'bg-red-100 text-red-700',
     yellow: 'bg-amber-100 text-amber-700',
-    blue: 'bg-blue-100 text-blue-700',
-    purple: 'bg-purple-100 text-purple-700',
     orange: 'bg-orange-100 text-orange-700',
+    primary: 'bg-primary-100 text-primary-700',
   };
   return (
     <span className={clsx('inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold', colors[color], className)}>
@@ -148,10 +146,10 @@ export function DecisionBadge({ decision }) {
 
 export function JobTypeBadge({ type }) {
   const map = {
-    'Full-time': 'indigo',
+    'Full-time': 'primary',
     'Remote': 'green',
-    'Hybrid': 'blue',
-    'Part-time': 'orange',
+    'Hybrid': 'orange',
+    'Part-time': 'yellow',
   };
   return <Badge color={map[type] || 'gray'}>{type}</Badge>;
 }

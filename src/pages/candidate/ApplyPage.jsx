@@ -92,16 +92,16 @@ export default function ApplyPage() {
         </Link>
 
         {/* Job info card */}
-        <div className="bg-gradient-to-r from-primary-700 to-indigo-700 text-white rounded-2xl p-6 mb-8 shadow-lg">
+        <div className="bg-gradient-to-r from-primary-700 to-primary-900 text-white rounded-2xl p-6 mb-8 shadow-lg">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-indigo-200 text-sm font-semibold mb-1">Melamar untuk posisi</p>
+              <p className="text-primary-200 text-sm font-semibold mb-1">Melamar untuk posisi</p>
               <h1 className="text-2xl font-extrabold">{job.title}</h1>
-              <p className="text-indigo-200 text-sm mt-1">{job.department}</p>
+              <p className="text-primary-200 text-sm mt-1">{job.department}</p>
             </div>
             <JobTypeBadge type={job.type} />
           </div>
-          <div className="flex flex-wrap gap-4 mt-4 text-sm text-indigo-200">
+          <div className="flex flex-wrap gap-4 mt-4 text-sm text-primary-200">
             <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {job.location}</span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-4 h-4" />

@@ -27,13 +27,13 @@ export default function AnnouncementPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-primary-700 to-indigo-700 text-white py-14">
+      <div className="bg-gradient-to-r from-primary-700 to-primary-900 text-white py-14">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
             <Bell className="w-7 h-7" />
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold mb-3">Pengumuman Seleksi</h1>
-          <p className="text-indigo-200 text-base">
+          <p className="text-primary-200 text-base">
             Masukkan nama lengkap atau nomor HP kamu untuk mengecek status lamaran.
           </p>
         </div>

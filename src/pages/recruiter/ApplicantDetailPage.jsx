@@ -48,7 +48,7 @@ export default function ApplicantDetailPage() {
           {/* Profile card */}
           <Card className="p-6">
             <div className="flex flex-col items-center text-center gap-3 pb-5 border-b border-gray-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-indigo-500 rounded-2xl flex items-center justify-center text-white text-2xl font-extrabold shadow-lg">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center text-white text-2xl font-extrabold shadow-lg">
                 {applicant.name.charAt(0)}
               </div>
               <div>
@@ -97,7 +97,7 @@ export default function ApplicantDetailPage() {
               </div>
               {applicant.portfolioFile && (
                 <div className="flex items-center gap-2.5 p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <FolderOpen className="w-4 h-4 text-indigo-500 shrink-0" />
+                  <FolderOpen className="w-4 h-4 text-primary-500 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-gray-700 truncate">{applicant.portfolioFile}</p>
                     <p className="text-xs text-gray-400">Portfolio</p>
@@ -187,14 +187,14 @@ export default function ApplicantDetailPage() {
           {/* Skills */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 bg-indigo-50 rounded-lg flex items-center justify-center">
-                <Briefcase className="w-5 h-5 text-indigo-600" />
+              <div className="w-9 h-9 bg-primary-50 rounded-lg flex items-center justify-center">
+                <Briefcase className="w-5 h-5 text-primary-600" />
               </div>
               <h2 className="font-extrabold text-gray-900">Skills Terdeteksi</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {applicant.aiSkills.length > 0 ? applicant.aiSkills.map((skill) => (
-                <Badge key={skill} color="indigo">{skill}</Badge>
+                <Badge key={skill} color="primary">{skill}</Badge>
               )) : <p className="text-sm text-gray-400">Belum ada data skill terdeteksi.</p>}
             </div>
           </Card>
