@@ -10,15 +10,20 @@ export default function RecruiterLoginPage() {
 
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      loginRecruiter();
+    setErrorMsg('');
+    const success = await loginRecruiter(form.email, form.password); // Using email as username for now
+    if (success) {
       navigate('/recruiter/dashboard');
-    }, 800);
+    } else {
+      setErrorMsg('Username atau password salah!');
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,15 +47,21 @@ export default function RecruiterLoginPage() {
           <h2 className="text-xl font-bold text-gray-900 mb-1">Selamat Datang 👋</h2>
           <p className="text-gray-500 text-sm mb-8">Masukkan kredensial Anda untuk melanjutkan</p>
 
+          {errorMsg && (
+            <div className="bg-red-50 text-red-600 px-4 py-3 rounded-xl mb-4 text-sm font-semibold">
+              {errorMsg}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            {/* Email */}
+            {/* Email / Username */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-gray-700">Email</label>
+              <label className="text-sm font-semibold text-gray-700">Username</label>
               <div className="flex items-center gap-3 border border-gray-300 rounded-xl px-4 py-3 focus-within:ring-2 focus-within:ring-primary-400 focus-within:border-primary-400 transition-shadow">
                 <Mail className="w-4 h-4 text-gray-400 shrink-0" />
                 <input
-                  type="email"
-                  placeholder="recruiter@company.com"
+                  type="text"
+                  placeholder="admin"
                   value={form.email}
                   onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
                   className="flex-1 outline-none text-sm text-gray-700 placeholder:text-gray-400"
@@ -82,9 +93,8 @@ export default function RecruiterLoginPage() {
               </div>
             </div>
 
-            {/* Demo hint */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-700">
-              <span className="font-bold">Demo:</span> Gunakan email dan password apapun — login akan langsung berhasil.
+              <span className="font-bold">Info Login:</span> Gunakan Username: <strong>admin</strong> dan Password: <strong>password123</strong>
             </div>
 
             <Button type="submit" size="lg" className="w-full mt-2" disabled={isLoading}>

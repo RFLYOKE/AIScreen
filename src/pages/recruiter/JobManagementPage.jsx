@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Pencil, XCircle, Users, Calendar } from 'lucide-react';
+import { Plus, Pencil, XCircle, Users, Calendar, Trash2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Card, Badge, Button, Input, Select, Textarea, Modal, JobTypeBadge } from '../../components/ui';
 
 const emptyForm = { title: '', description: '', type: 'Full-time', deadline: '' };
 
 export default function JobManagementPage() {
-  const { jobs, addJob, updateJob, closeJob } = useApp();
+  const { jobs, addJob, updateJob, closeJob, deleteJob } = useApp();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [form, setForm] = useState(emptyForm);
@@ -116,6 +116,9 @@ export default function JobManagementPage() {
                           <XCircle className="w-3.5 h-3.5" />
                         </Button>
                       )}
+                      <Button variant="ghost" size="sm" className="text-red-500 hover:bg-red-50" onClick={() => { if(window.confirm('Yakin ingin menghapus lowongan ini?')) deleteJob(job.id); }}>
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </Button>
                     </div>
                   </td>
                 </tr>

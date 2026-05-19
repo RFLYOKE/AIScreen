@@ -1,78 +1,146 @@
-import { createContext, useContext, useState } from 'react';
-import { mockJobs, mockApplicants } from '../data/mockData';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AppContext = createContext(null);
+const API_URL = 'http://localhost:3001/api';
 
 export function AppProvider({ children }) {
-  const [jobs, setJobs] = useState(mockJobs);
-  const [applicants, setApplicants] = useState(mockApplicants);
+  const [jobs, setJobs] = useState([]);
+  const [applicants, setApplicants] = useState([]);
   const [isRecruiterLoggedIn, setIsRecruiterLoggedIn] = useState(false);
 
+  useEffect(() => {
+    fetch(`${API_URL}/jobs`).then(res => res.json()).then(setJobs).catch(console.error);
+    fetch(`${API_URL}/applicants`).then(res => res.json()).then(setApplicants).catch(console.error);
+  }, []);
+
   // ── Recruiter auth ──────────────────────────────────────────────────────────
-  const loginRecruiter = () => setIsRecruiterLoggedIn(true);
+  const loginRecruiter = async (username, password) => {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsRecruiterLoggedIn(true);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  };
   const logoutRecruiter = () => setIsRecruiterLoggedIn(false);
 
   // ── Job management ──────────────────────────────────────────────────────────
-  const addJob = (jobData) => {
-    const newJob = {
-      ...jobData,
-      id: `job-${Date.now()}`,
-      status: 'active',
-      totalApplicants: 0,
-    };
-    setJobs((prev) => [...prev, newJob]);
-    return newJob;
+  const addJob = async (jobData) => {
+    try {
+      const res = await fetch(`${API_URL}/jobs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(jobData)
+      });
+      const newJob = await res.json();
+      setJobs((prev) => [...prev, newJob]);
+      return newJob;
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const updateJob = (jobId, updates) => {
-    setJobs((prev) => prev.map((j) => (j.id === jobId ? { ...j, ...updates } : j)));
+  const updateJob = async (jobId, updates) => {
+    try {
+      const res = await fetch(`${API_URL}/jobs/${jobId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+      });
+      const updatedJob = await res.json();
+      setJobs((prev) => prev.map((j) => (j.id === jobId ? updatedJob : j)));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const closeJob = (jobId) => updateJob(jobId, { status: 'closed' });
+  const closeJob = async (jobId) => {
+    try {
+      const res = await fetch(`${API_URL}/jobs/${jobId}/close`, { method: 'PATCH' });
+      const updatedJob = await res.json();
+      setJobs((prev) => prev.map((j) => (j.id === jobId ? updatedJob : j)));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const deleteJob = async (jobId) => {
+    try {
+      await fetch(`${API_URL}/jobs/${jobId}`, { method: 'DELETE' });
+      setJobs((prev) => prev.filter((j) => j.id !== jobId));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   // ── Applicant management ────────────────────────────────────────────────────
-  const addApplicant = (data) => {
-    const job = jobs.find((j) => j.id === data.jobId);
-    const newApplicant = {
-      ...data,
-      id: `app-${Date.now()}`,
-      position: job?.title || data.position,
-      aiScore: Math.floor(Math.random() * 30) + 60,
-      aiDecision: Math.random() > 0.4 ? 'lolos' : 'tidak_lolos',
-      aiSkills: [],
-      aiCertifications: [],
-      aiReason: 'Proses analisis sedang berjalan. Hasil akan tersedia segera.',
-      published: false,
-      overrideDecision: null,
-      appliedAt: new Date().toISOString().split('T')[0],
-    };
-    setApplicants((prev) => [...prev, newApplicant]);
-    setJobs((prev) =>
-      prev.map((j) =>
-        j.id === data.jobId ? { ...j, totalApplicants: j.totalApplicants + 1 } : j
-      )
-    );
-    return newApplicant;
+  const addApplicant = async (data) => {
+    try {
+      const res = await fetch(`${API_URL}/applicants`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const newApplicant = await res.json();
+      setApplicants((prev) => [...prev, newApplicant]);
+      setJobs((prev) =>
+        prev.map((j) =>
+          j.id === data.jobId ? { ...j, totalApplicants: j.totalApplicants + 1 } : j
+        )
+      );
+      return newApplicant;
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const overrideApplicantDecision = (applicantId, decision) => {
-    setApplicants((prev) =>
-      prev.map((a) =>
-        a.id === applicantId ? { ...a, overrideDecision: decision } : a
-      )
-    );
+  const overrideApplicantDecision = async (applicantId, decision) => {
+    try {
+      const res = await fetch(`${API_URL}/applicants/${applicantId}/override`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ decision })
+      });
+      const updated = await res.json();
+      setApplicants((prev) =>
+        prev.map((a) => (a.id === applicantId ? updated : a))
+      );
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const publishApplicant = (applicantId) => {
-    setApplicants((prev) =>
-      prev.map((a) => (a.id === applicantId ? { ...a, published: true } : a))
-    );
+  const publishApplicant = async (applicantId) => {
+    try {
+      const res = await fetch(`${API_URL}/applicants/${applicantId}/publish`, { method: 'PATCH' });
+      const updated = await res.json();
+      setApplicants((prev) =>
+        prev.map((a) => (a.id === applicantId ? updated : a))
+      );
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const bulkPublish = (jobId) => {
-    setApplicants((prev) =>
-      prev.map((a) => (a.jobId === jobId ? { ...a, published: true } : a))
-    );
+  const bulkPublish = async (jobId) => {
+    try {
+      await fetch(`${API_URL}/jobs/${jobId}/bulk-publish`, { method: 'POST' });
+      setApplicants((prev) =>
+        prev.map((a) => (a.jobId === jobId ? { ...a, published: true } : a))
+      );
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -111,7 +179,7 @@ export function AppProvider({ children }) {
       value={{
         jobs, applicants, isRecruiterLoggedIn,
         loginRecruiter, logoutRecruiter,
-        addJob, updateJob, closeJob,
+        addJob, updateJob, closeJob, deleteJob,
         addApplicant, overrideApplicantDecision, publishApplicant, bulkPublish,
         getApplicantsByJob, getEffectiveDecision, lookupCandidate,
         stats,
