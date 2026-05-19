@@ -279,8 +279,14 @@ export const mockApplicants = [
 ];
 
 // ─── CITIES ───────────────────────────────────────────────────────────────────
-export const indonesianCities = [
-  'Jakarta', 'Bandung', 'Surabaya', 'Medan', 'Semarang', 'Makassar',
-  'Palembang', 'Tangerang', 'Depok', 'Yogyakarta', 'Bekasi', 'Bogor',
-  'Malang', 'Batam', 'Pekanbaru', 'Denpasar', 'Balikpapan', 'Banjarmasin',
+export const indonesianProvinces = [
+  'Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Riau', 'Kepulauan Riau', 
+  'Jambi', 'Sumatera Selatan', 'Kepulauan Bangka Belitung', 'Bengkulu', 'Lampung',
+  'DKI Jakarta', 'Banten', 'Jawa Barat', 'Jawa Tengah', 'DI Yogyakarta', 'Jawa Timur',
+  'Bali', 'Nusa Tenggara Barat', 'Nusa Tenggara Timur',
+  'Kalimantan Barat', 'Kalimantan Tengah', 'Kalimantan Selatan', 'Kalimantan Timur', 'Kalimantan Utara',
+  'Sulawesi Utara', 'Gorontalo', 'Sulawesi Tengah', 'Sulawesi Barat', 'Sulawesi Selatan', 'Sulawesi Tenggara',
+  'Maluku', 'Maluku Utara', 
+  'Papua Barat', 'Papua Barat Daya', 'Papua', 'Papua Selatan', 'Papua Tengah', 'Papua Pegunungan',
+  'Remote'
 ];

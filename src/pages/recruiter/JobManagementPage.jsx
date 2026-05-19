@@ -4,8 +4,9 @@ import { Plus, Pencil, XCircle, Users, Calendar, Trash2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Card, Badge, Button, Input, Select, Textarea, Modal, JobTypeBadge } from '../../components/ui';
 import Swal from 'sweetalert2';
+import { indonesianProvinces } from '../../data/mockData';
 
-const emptyForm = { title: '', description: '', type: 'Full-time', deadline: '' };
+const emptyForm = { title: '', description: '', type: 'Full-time', location: '', deadline: '' };
 
 export default function JobManagementPage() {
   const { jobs, addJob, updateJob, closeJob, deleteJob } = useApp();
@@ -23,7 +24,7 @@ export default function JobManagementPage() {
 
   const openEdit = (job) => {
     setEditingJob(job);
-    setForm({ title: job.title, description: job.description, type: job.type, deadline: job.deadline });
+    setForm({ title: job.title, description: job.description, type: job.type, location: job.location || '', deadline: job.deadline });
     setErrors({});
     setModalOpen(true);
   };
@@ -32,6 +33,7 @@ export default function JobManagementPage() {
     const e = {};
     if (!form.title.trim()) e.title = 'Nama posisi wajib diisi';
     if (!form.description.trim()) e.description = 'Deskripsi wajib diisi';
+    if (!form.location) e.location = 'Lokasi wajib dipilih';
     if (!form.deadline) e.deadline = 'Deadline wajib diisi';
     return e;
   };
@@ -181,6 +183,17 @@ export default function JobManagementPage() {
             <Select label="Tipe Pekerjaan" value={form.type} onChange={handleChange('type')}>
               {['Full-time', 'Part-time', 'Remote', 'Hybrid'].map((t) => (
                 <option key={t}>{t}</option>
+              ))}
+            </Select>
+            <Select
+              label="Lokasi *"
+              value={form.location}
+              onChange={handleChange('location')}
+              error={errors.location}
+            >
+              <option value="">Pilih Wilayah</option>
+              {indonesianProvinces.map((prov) => (
+                <option key={prov} value={prov}>{prov}</option>
               ))}
             </Select>
             <Input

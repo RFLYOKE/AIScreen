@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Upload, CheckCircle2, ChevronLeft, Briefcase, MapPin, Clock } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Button, Input, Select, Modal, JobTypeBadge } from '../../components/ui';
-import { indonesianCities } from '../../data/mockData';
+import { indonesianProvinces } from '../../data/mockData';
 
 const experienceOptions = [
   'Fresh Graduate',
@@ -140,8 +140,8 @@ export default function ApplyPage() {
                 onChange={handleChange('location')}
                 error={errors.location}
               >
-                <option value="">Pilih Kota</option>
-                {indonesianCities.map((city) => (
+                <option value="">Pilih Wilayah</option>
+                {indonesianProvinces.map((city) => (
                   <option key={city} value={city}>{city}</option>
                 ))}
               </Select>
