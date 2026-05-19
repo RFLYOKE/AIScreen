@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus, Pencil, XCircle, Users, Calendar, Trash2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Card, Badge, Button, Input, Select, Textarea, Modal, JobTypeBadge } from '../../components/ui';
+import Swal from 'sweetalert2';
 
 const emptyForm = { title: '', description: '', type: 'Full-time', deadline: '' };
 
@@ -42,8 +43,22 @@ export default function JobManagementPage() {
 
     if (editingJob) {
       updateJob(editingJob.id, form);
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Lowongan berhasil diubah',
+        timer: 1500,
+        showConfirmButton: false
+      });
     } else {
       addJob(form);
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Lowongan baru berhasil ditambahkan',
+        timer: 1500,
+        showConfirmButton: false
+      });
     }
     setModalOpen(false);
   };
@@ -116,7 +131,23 @@ export default function JobManagementPage() {
                           <XCircle className="w-3.5 h-3.5" />
                         </Button>
                       )}
-                      <Button variant="ghost" size="sm" className="text-red-500 hover:bg-red-50" onClick={() => { if(window.confirm('Yakin ingin menghapus lowongan ini?')) deleteJob(job.id); }}>
+                      <Button variant="ghost" size="sm" className="text-red-500 hover:bg-red-50" onClick={() => {
+                        Swal.fire({
+                          title: 'Hapus Lowongan?',
+                          text: "Lowongan ini akan dihapus permanen!",
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#ef4444',
+                          cancelButtonColor: '#6b7280',
+                          confirmButtonText: 'Ya, hapus!',
+                          cancelButtonText: 'Batal'
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            deleteJob(job.id);
+                            Swal.fire('Terhapus!', 'Lowongan berhasil dihapus.', 'success');
+                          }
+                        });
+                      }}>
                         <Trash2 className="w-3.5 h-3.5" />
                       </Button>
                     </div>

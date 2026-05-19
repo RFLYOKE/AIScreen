@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BrainCircuit, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Button } from '../../components/ui';
+import Swal from 'sweetalert2';
 
 export default function RecruiterLoginPage() {
   const { loginRecruiter } = useApp();
@@ -19,9 +20,20 @@ export default function RecruiterLoginPage() {
     setErrorMsg('');
     const success = await loginRecruiter(form.email, form.password); // Using email as username for now
     if (success) {
-      navigate('/recruiter/dashboard');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Berhasil!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        navigate('/recruiter/dashboard');
+      });
     } else {
-      setErrorMsg('Username atau password salah!');
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Gagal',
+        text: 'Username atau password salah!'
+      });
       setIsLoading(false);
     }
   };
