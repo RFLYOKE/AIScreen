@@ -23,7 +23,7 @@ export default function ApplyPage() {
   const [form, setForm] = useState({
     name: '',
     phone: '+62',
-    location: '',
+    location: job?.location || '',
     position: job?.id || '',
     yearsExperience: '',
     cvFile: null,
@@ -46,7 +46,6 @@ export default function ApplyPage() {
     const e = {};
     if (!form.name.trim()) e.name = 'Nama lengkap wajib diisi';
     if (!form.phone || form.phone === '+62') e.phone = 'Nomor HP wajib diisi';
-    if (!form.location) e.location = 'Lokasi wajib dipilih';
     if (!form.yearsExperience) e.yearsExperience = 'Pengalaman wajib dipilih';
     if (!form.cvFile) e.cvFile = 'CV wajib diupload';
     return e;
@@ -134,17 +133,13 @@ export default function ApplyPage() {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-5">
-              <Select
-                label="Lokasi *"
-                value={form.location}
-                onChange={handleChange('location')}
-                error={errors.location}
-              >
-                <option value="">Pilih Wilayah</option>
-                {indonesianProvinces.map((city) => (
-                  <option key={city} value={city}>{city}</option>
-                ))}
-              </Select>
+              {/* Lokasi (read-only) */}
+              <div className="flex flex-col gap-1">
+                <label className="text-sm font-semibold text-gray-700">Lokasi Penempatan</label>
+                <div className="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-gray-50 text-sm text-gray-600 font-medium">
+                  {job.location}
+                </div>
+              </div>
               <Select
                 label="Pengalaman Kerja *"
                 value={form.yearsExperience}

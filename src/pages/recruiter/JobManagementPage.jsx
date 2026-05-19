@@ -192,6 +192,7 @@ export default function JobManagementPage() {
               error={errors.location}
             >
               <option value="">Pilih Wilayah</option>
+              <option value="Semua Wilayah">Semua Wilayah</option>
               {indonesianProvinces.map((prov) => (
                 <option key={prov} value={prov}>{prov}</option>
               ))}
