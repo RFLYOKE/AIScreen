@@ -105,9 +105,10 @@ export default function RecruiterLoginPage() {
               </div>
             </div>
 
-            {/* <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-700">
-              <span className="font-bold">Info Login:</span> Gunakan Username: <strong>admin</strong> dan Password: <strong>password123</strong>
-            </div> */}
+            <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-700">
+              {/* <span className="font-bold">Info Login:</span> Gunakan Username: <strong>admin</strong> dan Password: <strong>password123</strong> */}
+              <span className="font-bold">Info Login:</span> Gunakan Username: <strong>admin</strong>
+            </div>
 
             <Button type="submit" size="lg" className="w-full mt-2" disabled={isLoading}>
               {isLoading ? (
