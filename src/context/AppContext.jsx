@@ -6,7 +6,9 @@ const API_URL = 'http://localhost:3001/api';
 export function AppProvider({ children }) {
   const [jobs, setJobs] = useState([]);
   const [applicants, setApplicants] = useState([]);
-  const [isRecruiterLoggedIn, setIsRecruiterLoggedIn] = useState(false);
+  const [isRecruiterLoggedIn, setIsRecruiterLoggedIn] = useState(() => {
+    return !!localStorage.getItem('token');
+  });
 
   useEffect(() => {
     fetch(`${API_URL}/jobs`).then(res => res.json()).then(setJobs).catch(console.error);
@@ -23,6 +25,7 @@ export function AppProvider({ children }) {
       });
       const data = await res.json();
       if (data.success) {
+        localStorage.setItem('token', data.token);
         setIsRecruiterLoggedIn(true);
         return true;
       }
@@ -32,7 +35,10 @@ export function AppProvider({ children }) {
       return false;
     }
   };
-  const logoutRecruiter = () => setIsRecruiterLoggedIn(false);
+  const logoutRecruiter = () => {
+    localStorage.removeItem('token');
+    setIsRecruiterLoggedIn(false);
+  };
 
   // ── Job management ──────────────────────────────────────────────────────────
   const addJob = async (jobData) => {
