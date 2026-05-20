@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Upload, CheckCircle2, ChevronLeft, Briefcase, MapPin, Clock } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Button, Input, Select, Modal, JobTypeBadge } from '../../components/ui';
-import { indonesianProvinces } from '../../data/mockData';
+// import { indonesianProvinces } from '../../data/mockData';
 
 const experienceOptions = [
   'Fresh Graduate',
